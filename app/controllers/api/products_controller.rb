@@ -4,18 +4,8 @@ class Api::ProductsController < ApplicationController
     render "all_products.json.jb"
   end
 
-  def first_product_action
-    @product = Product.first
-    render "product.json.jb"
-  end
-
-  def second_product_action
-    @product = Product.second
-    render "product.json.jb"
-  end
-
-  def third_product_action
-    @product = Product.third
+  def one_product_action
+    @product = Product.find_by(id: params["product_id"])
     render "product.json.jb"
   end
 end
