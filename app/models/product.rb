@@ -16,6 +16,10 @@ class Product < ApplicationRecord
           end
         }
 
+  def supplier
+    Supplier.find_by(id: supplier_id)
+  end
+
   def friendly_updated_at
     updated_at.strftime("%B%e, %Y")
   end
