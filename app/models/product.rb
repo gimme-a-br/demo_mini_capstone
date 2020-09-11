@@ -4,6 +4,11 @@ class Product < ApplicationRecord
   validates :description, length: { in: 2..1000 }
   validates_format_of :image_url, :with => %r{\.(png|jpg|jpeg|gif)$}i, :message => "must have a valid filetype", multiline: true
 
+  belongs_to :supplier
+  # def supplier
+  #   Supplier.find_by(id: supplier_id)
+  # end
+
   scope :title_search, ->(search_terms) { where("name ILIKE ?", "%#{search_terms}%") if search_terms }
   scope :discounted, ->(check_discount) { where("price < ?", 10) if check_discount }
   scope :sorted, ->(sort, sort_order) {
@@ -15,10 +20,6 @@ class Product < ApplicationRecord
             order(id: :asc)
           end
         }
-
-  def supplier
-    Supplier.find_by(id: supplier_id)
-  end
 
   def friendly_updated_at
     updated_at.strftime("%B%e, %Y")
