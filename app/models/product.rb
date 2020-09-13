@@ -2,11 +2,15 @@ class Product < ApplicationRecord
   validates :name, presence: true
   validates :price, numericality: { greater_than: 0 }
   validates :description, length: { in: 2..1000 }
-  validates_format_of :image_url, :with => %r{\.(png|jpg|jpeg|gif)$}i, :message => "must have a valid filetype", multiline: true
 
   belongs_to :supplier
   # def supplier
   #   Supplier.find_by(id: supplier_id)
+  # end
+
+  has_many :images
+  # def images
+  #   Image.where(product_id: id)
   # end
 
   scope :title_search, ->(search_terms) { where("name ILIKE ?", "%#{search_terms}%") if search_terms }
