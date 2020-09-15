@@ -13,6 +13,8 @@ class Product < ApplicationRecord
   #   Image.where(product_id: id)
   # end
 
+  has_many :orders
+
   scope :title_search, ->(search_terms) { where("name ILIKE ?", "%#{search_terms}%") if search_terms }
   scope :discounted, ->(check_discount) { where("price < ?", 10) if check_discount }
   scope :sorted, ->(sort, sort_order) {
