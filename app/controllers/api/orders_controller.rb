@@ -24,4 +24,9 @@ class Api::OrdersController < ApplicationController
       render json: { errors: @order.errors.full_messages }
     end
   end
+
+  def show
+    @order = Order.find_by(id: params[:id])
+    render "show.json.jb"
+  end
 end
