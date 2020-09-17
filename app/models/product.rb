@@ -14,6 +14,13 @@ class Product < ApplicationRecord
   # end
 
   has_many :orders
+  has_many :category_products
+  has_many :categories, through: :category_products
+  # def categories
+  #   category_products.map do |category_product|
+  #     category_product.category
+  #   end
+  # end
 
   scope :title_search, ->(search_terms) { where("name ILIKE ?", "%#{search_terms}%") if search_terms }
   scope :discounted, ->(check_discount) { where("price < ?", 10) if check_discount }
